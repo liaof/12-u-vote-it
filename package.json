@@ -1,15 +1,27 @@
 {
   "name": "12-sql",
   "version": "1.0.0",
-  "description": "",
+  "description": "All SQL keywords are written in all caps, and all SQL statements are terminated with ;</br>",
   "main": "index.js",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "start": "node server.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "jest": "^26.6.3",
     "mysql2": "^2.2.5"
-  }
+  },
+  "devDependencies": {
+    "jest": "^26.6.3"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/liaof/12-u-vote-it.git"
+  },
+  "keywords": [],
+  "bugs": {
+    "url": "https://github.com/liaof/12-u-vote-it/issues"
+  },
+  "homepage": "https://github.com/liaof/12-u-vote-it#readme"
 }
