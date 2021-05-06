@@ -6,9 +6,19 @@ All SQL keywords are written in all caps, and all SQL statements are terminated 
 
 'npm install --save mysql2' in the root folder</br>
 
-SELECT * FROM candidates; this displays the table with the name 'candidates'</br>
+SELECT * FROM candidates; this displays all rows of all columns of the table with the name 'candidates'</br>
 
-SELECT n,m FROM candidates; this displays the n & m columns of the table with the name 'candidates'</br>
+SELECT n,m FROM candidates; this displays all rows of the n & m columns of the table with the name 'candidates'</br>
+
+SELECT n,m FROM candidates WHERE x = b; this displays the same as above but only for candidates for who x=b. WHERE keyword acts as a filter
+
+SELEct n,m FROM candidates WHERE id = b; we can also filter via id
+
+DROP DATABASE elections; this permenatnly delets the DATABASE called elections
+
+UPDATE candidates SET industry_connected = 1 WHERE id = 3; this changes the industry_connected value of the row/item of id=3
+
+DELETE FROM candidates WHERE first_name = "Montague"; this deletes the row/item with a first_name value of "Montague"
 
 ## Definitions
 
