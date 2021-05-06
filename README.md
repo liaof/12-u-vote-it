@@ -30,6 +30,7 @@ A *table* is composed of rows and columns. A column represents a field. A row re
 A *query* is a request for data from a database table or a combination of tables.</br>
 
 ##### The following code insterts data into a table;
+
 INSERT INTO candidates (first_name, last_name, industry_connected)</br>
 VALUES ('Ronald', 'Firbank', 1);
 
@@ -37,4 +38,13 @@ VALUES ('Ronald', 'Firbank', 1);
 -inside the following parentheses are the columns we'll be inserting into</br>
 -VALUES() defines the values we wish to insert, it must match the same order as the parameters from the above line (the primary key 'id' will not need a value to be inserted because it is internally generated)</br>
 - VARCHAR values will have to be surrounded by '' because they are strings
+
+#### Code Example
+
+const sql = `INSERT INTO candidates (id, first_name, last_name, industry_connected) </br>
+              VALUES (?,?,?,?)`; </br>
+const params = [1, 'Ronald', 'Firbank', 1];</br>
+db.query(sql, params, (err, result)</br>
+
+In the above code, we send an SQL query with id = 1, first_name = 'Ronald', last_name = 'Firbank', industry_connected = 1
 
