@@ -26,17 +26,17 @@ const db = mysql.createConnection(
 // the query is the 1st param, callback 2nd
 // err is the error response, and rows is the database query response
 // if there are no errors in the SQL query, err = null
-db.query(`SELECT * FROM candidates`, (err, rows) => {
-    console.log(rows);
-});
+//db.query(`SELECT * FROM candidates`, (err, rows) => {
+//    console.log(rows);
+//});
 
 // GET a single candidate based on id
-db.query(`SELECT * FROM candidates WHERE id = 1`, (err, row) => {
-    if (err) {
-      console.log(err);
-    }
-    console.log(row);
-});
+//db.query(`SELECT * FROM candidates WHERE id = 1`, (err, row) => {
+//    if (err) {
+//      console.log(err);
+//    }
+//    console.log(row);
+//});
 
 // Delete a candidate based on id
 // notice the id = ? the questionmark is a placeholder who's value is determined in the next parameter, in this case 1
@@ -52,12 +52,12 @@ const sql = `INSERT INTO candidates (id, first_name, last_name, industry_connect
               VALUES (?,?,?,?)`;//these placeholders are filled out by the following array, in the order they appear
 const params = [1, 'Ronald', 'Firbank', 1];
 
-db.query(sql, params, (err, result) => {
-  if (err) {
-    console.log(err);
-  }
-  console.log(result);
-});
+//db.query(sql, params, (err, result) => {
+//  if (err) {
+//    console.log(err);
+//  }
+//  console.log(result);
+//});
 
 // Default response for any other request (Endpoint Not Found)
 // Because this catches all routes, as the endpoint is not specced, put this at the end
