@@ -5,6 +5,7 @@
   Ensures we start with a clean slate each time this file is run*/
 DROP TABLE IF EXISTS candidates;
 DROP TABLE IF EXISTS parties;
+DROP TABLE IF EXISTS voters;
 
 CREATE TABLE parties (
   id INTEGER AUTO_INCREMENT PRIMARY KEY,
@@ -25,4 +26,13 @@ CREATE TABLE candidates (
      
      Then, ON DELETE SET Null means if the parties.id is deleted, the corresponding party_id field/s will be set to null*/
   CONSTRAINT fk_party FOREIGN KEY (party_id) REFERENCES parties(id) ON DELETE SET Null
+);
+
+CREATE TABLE voters (
+  id INTEGER AUTO_INCREMENT PRIMARY KEY,
+  first_name VARCHAR(30) NOT NULL,
+  last_name VARCHAR(30) NOT NULL,
+  email VARCHAR(50) NOT NULL,
+  created_at DATETIME DEFAULT CURRENT_TIMESTAMP/*caputres timestap at DATETIME it was created at. DEFAULT refers to the 
+                                                  formatting of the date/time CURRENT_TIMESTAMP specifies the current time*/
 );
