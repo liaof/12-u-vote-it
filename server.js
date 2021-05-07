@@ -23,7 +23,7 @@ const db = mysql.createConnection(
 );
 
 //db object using query() method to print all rows
-//This method runs the SQL query and executes the callback with all the resulting rows that match the query.
+//query() runs the SQL query and executes the callback with all the resulting rows that match the query.
 // the query is the 1st param, callback 2nd
 // err is the error response, and rows is the database query response
 // if there are no errors in the SQL query, err = null
@@ -32,7 +32,12 @@ const db = mysql.createConnection(
 //});
 // Get all candidates, see above for more info
 app.get('/api/candidates', (req, res) => {
-    const sql = `SELECT * FROM candidates`;
+    // **** const sql equates to what we would type into the cmd line ***
+    const sql = `SELECT candidates.*, parties.name 
+                  AS party_name 
+                  FROM candidates 
+                  LEFT JOIN parties 
+                  ON candidates.party_id = parties.id`;
   
     db.query(sql, (err, rows) => {
       if (err) {
@@ -51,11 +56,19 @@ app.get('/api/candidates', (req, res) => {
 // GET a single candidate based on id
 // first parameter is the route parameter that will hold the value of id, as specified
 app.get('/api/candidate/:id', (req, res) => {
-    const sql = `SELECT * FROM candidates WHERE id = ?`;
+    // **** const sql equates to what we would type into the cmd line ***
+    const sql = `SELECT candidates.*, parties.name 
+                  AS party_name 
+                  FROM candidates 
+                  LEFT JOIN parties 
+                  ON candidates.party_id = parties.id 
+                  WHERE candidates.id = ?`;
     // assign the id parameter of the request to the const 'params'
-    const params = [req.params.id];
     // params will equal the index specified in the url endpoint
     // http://localhost:3001/api/candidate/1 will mean req.params.id = 1
+    const params = [req.params.id];
+
+    // any field with a value of '?' will have take the value of the 2nd query() parameter, respectively if there are multiple fields
     db.query(sql, params, (err, row) => {
       if (err) {
         res.status(400).json({ error: err.message });
@@ -73,7 +86,7 @@ app.delete('/api/candidate/:id', (req, res) => {
     const sql = `DELETE FROM candidates WHERE id = ?`;
     const params = [req.params.id];
     
-    // notice the id = ? the questionmark is a placeholder who's value is determined in the next parameter, which is represented by params
+    // notice the id = ? the questionmark is a placeholder who's value is determined in the next parameter of query(), which is represented by params
     db.query(sql, params, (err, result) => {
       if (err) {
         res.statusMessage(400).json({ error: res.message });

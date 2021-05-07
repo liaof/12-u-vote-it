@@ -1,4 +1,10 @@
-/* to use, type 'source db/schema.sql' in the sql cmd line*/
+/* to use, type 'source db/schema.sql' in the sql cmd prmpt*/
+/* db.sql -> schema.sql -> seeds.sql*/
+
+/*if 'candidates' and 'partie's exist, delete 'candidates' and 'parties'
+  Ensures we start with a clean slate each time this file is run*/
+DROP TABLE IF EXISTS candidates;
+DROP TABLE IF EXISTS parties;
 
 CREATE TABLE parties (
   id INTEGER AUTO_INCREMENT PRIMARY KEY,
@@ -10,5 +16,13 @@ CREATE TABLE candidates (
   id INTEGER AUTO_INCREMENT PRIMARY KEY,/*PRIMARY KEY indicates this value will be our index, and that it is an INGTEGER that automatically increments*/
   first_name VARCHAR(30) NOT NULL,/* column called first_name that is a string of 30 or less chars, whose value cannot be null*/
   last_name VARCHAR(30) NOT NULL,
-  industry_connected BOOLEAN NOT NULL/*0=false and 1=true*/
+  party_id INTEGER,
+  industry_connected BOOLEAN NOT NULL,/*0=false and 1=true*/
+  /* flag the party_id as a foreign key, and tells SQL it references the 'id' field in the 'parties' table
+     Combined with CONSTRAINT, This ensures no id can be inserted into 'candidates' if it doesn't exist in 'parties'
+     
+     That is to say, we constrain the valid candidates.party_id values to the same set found in parties.id
+     
+     Then, ON DELETE SET Null means if the parties.id is deleted, the corresponding party_id field/s will be set to null*/
+  CONSTRAINT fk_party FOREIGN KEY (party_id) REFERENCES parties(id) ON DELETE SET Null
 );
