@@ -36,6 +36,7 @@ All SQL keywords are written in all caps, and all SQL statements are terminated 
 
 *SELECT candidates. *, parties.name AS party_name FROM candidates* Same as above but now we save parties.name as party_name
 
+*GROUP BY COUNT()*, when rows are grouped, COUNT() wil count how many times a value appears in the groups
 
 
 ## Definitions
